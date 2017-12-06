@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- 用户管理模块追加 -->
+<struts>
+    
+    <constant name="struts.ui.theme" value="simple" />
+
+    <package name="dang-user" namespace="/user" extends="dang-default">
+    <!-- 注册的action -->
+   <action name="register" class="org.tarena.dang.action.user.RegisterAction">
+      <result name="verify">/user/verify_form.jsp</result>
+   </action>
+      <!-- 登录的action -->
+   <action name="login" class="org.tarena.dang.action.user.LoginAction">
+          <!-- 未进行邮箱验证的跳转页面 -->
+      <result name="backToEmailValid">/user/verify_form.jsp</result>
+         <!-- 登录成功 -->
+      <result name="success">/main/main.jsp</result>
+         <!--用户未注册失败 -->
+      <result name="unexisted">/user/login_form.jsp</result>
+          <!--用户验证失败 -->
+      <result name="failed">/user/login_form.jsp</result>
+           <!-- 购物车不为空，则跳转到购物车列表 -->
+      <result name="cartList" type="redirectAction">
+         <!-- 
+         <param name="namespace">/cart</param>
+         <param name="actionName">/list</param>
+          -->
+          ../cart/list.action
+      </result>    
+   </action>
+     <!-- 退出登录 -->
+       <action name="logout" class="org.tarena.dang.action.user.LogoutAction">
+           <result>/user/login_form.jsp</result>
+       </action>
+     <!-- 验证用户是否邮箱的action -->
+   
+     <action name="isEmailValid_bak" class="org.tarena.dang.action.user.CheckEmailIsPassAction_bak">
+         <result>/user/register_ok.jsp</result>
+     </action>
+  
+   <action name="isEmailValid" class="org.tarena.dang.action.user.CheckEmailIsPassAction">
+         <!-- 邮箱验证失败 -->
+         <result type="json">
+             <param name="root">ok</param>
+         </result>
+   </action>
+   <!-- 验证邮箱是否合法的action -->
+    <action name="validEmail" class="org.tarena.dang.action.user.ValidEmailAction">
+       <result type="json">
+         <param name="root">ok</param>
+       </result>
+    </action>
+    <!-- 验证用户输入的验证码的action -->
+    <action name="verifyCode" class="org.tarena.dang.action.user.VerifyCodeAction">
+       <result type="json">
+          <param name="root">pass</param>
+       </result>
+    </action>
+    <!-- 界面上显示验证码的action -->
+   <action name="stream" class="org.tarena.dang.action.CheckCodeAction">
+       <result type="stream">
+				<param name="inputName">input</param>
+				<param name="contentType">image/jpeg</param>
+		</result>
+   </action>
+   <!-- 我的当当action -->
+    <action name="mydd" class="org.tarena.dang.action.user.MyddAction">
+      <result>/mdd/mdd.jsp</result>
+    </action>
+    <action name="mddModify" class="org.tarena.dang.action.user.MddModifyAction">
+      <result>/main/main.jsp</result>
+    </action>
+    </package>
+</struts>
+
+
+
+
+
+

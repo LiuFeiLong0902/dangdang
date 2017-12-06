@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="dang-order" namespace="/order" extends="dang-default">
+       <!-- 声明登录拦截器 -->
+      <interceptors>
+          <interceptor name="loginInterceptor" class="org.tarena.dang.interceptor.LoginInterceptor"></interceptor>
+      </interceptors>
+       <action name="order" class="org.tarena.dang.action.order.OrderAction">
+          <interceptor-ref name="dangStack"></interceptor-ref>
+           <interceptor-ref name="loginInterceptor"></interceptor-ref>
+             <result type="redirect" name="login">../user/login_form.jsp</result>
+               <result type="redirect" name="main">../main/main.jsp</result>
+              <result>/order/order_info.jsp</result>
+       </action>
+       <action name="address" class="org.tarena.dang.action.order.AddressAction">
+          <interceptor-ref name="dangStack" />
+            <interceptor-ref name="token" />               
+               <result name="invalid.token">/WEB-INF/page/message.jsp</result>  
+                  <result >/order/order_ok.jsp</result>
+       </action>
+        <action name="orderSub" class="org.tarena.dang.action.order.OrderSubAction">
+             <result>/order/address_form.jsp</result>
+        </action>
+         <action name="getAddress" class="org.tarena.dang.action.order.GetAddressAction">
+             <result type="json">
+                <param name="root">receive_add</param>
+             </result>
+         </action>
+    </package>
+</struts>
+
+
+
+
+
+

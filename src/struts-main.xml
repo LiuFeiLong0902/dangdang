@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="dang-main" namespace="/main" extends="dang-default">
+      <!-- 新书action -->  
+        <action name="news" class="org.tarena.dang.action.main.NewsAction">
+            <result>/main/new.jsp</result>
+        </action> 
+     <!-- 编辑推荐action -->   
+        <action name="recommend" class="org.tarena.dang.action.main.RecommendAction">
+            <result>/main/recommend.jsp</result>
+        </action>
+     <!-- 热销书action -->    
+       <action name="hot" class="org.tarena.dang.action.main.HotAction">
+			<result>/main/hot.jsp</result>
+	    </action>
+     <!-- 分类浏览action -->
+        <action name="category" class="org.tarena.dang.action.main.CategoryAction">
+            <result>/main/category.jsp</result>
+        </action>  
+     <!--书籍列表action -->   
+        <action name="booklist" class="org.tarena.dang.action.main.BookListAction">
+			<result>/main/book_list.jsp</result>
+	    </action>
+	 <!-- 同等父类下的书籍列表action -->   
+	    <action name="categoryListBook" class="org.tarena.dang.action.main.BookListAction" method="categoryListBook">
+	       <result>/main/book_list.jsp</result>
+	    </action>
+	 <!-- 商品的详细信息action --> 
+	    <action name="productDetail" class="org.tarena.dang.action.main.BookDetailAction">
+			<result>/main/product.jsp</result>
+	    </action>
+	 <!-- 进行排序action -->
+	    <action name="bookListOrder" class="org.tarena.dang.action.main.BookListAction">
+	       <result>/main/book_list.jsp</result>
+	    </action> 
+	    
+	   <!-- 后台管理action 开始 --> 
+	 <!-- 管理员登陆action --> 
+	    <action name="managerlogin" class="org.tarena.dang.action.main.ManagerLoginAction"> 
+           <result>/manager/manager.jsp</result>
+	       <result name="error">/index.jsp</result>
+	    </action>
+	 <!--查看用户action  --> 
+	    <action name="finduser" class="org.tarena.dang.action.main.FindUserAction">
+	       <result>/manager/alluser.jsp</result>
+	    </action>
+	 <!-- 删除用户action -->
+	    <action name="deleteuser" class="org.tarena.dang.action.main.DeleteUserAction">
+	       <result>/manager/userlist.jsp</result>
+	    </action>
+	 <!-- 删除指定的用户action --> 
+	    <action name="deletesingleuser" class="org.tarena.dang.action.main.DeleteSingleUserAction">
+	       <result type="redirectAction">deleteuser.action</result>
+	    </action>
+	 <!-- 更新用户的等级action -->
+	    <action name="updateuserintegral" class="org.tarena.dang.action.main.UpdateUserIntegralAction">
+	       <result>/manager/updateuserintegrallist.jsp</result>  
+	    </action>
+	 <!-- 更新指定的用户等级action -->
+	    <action name="updateintegral" class="org.tarena.dang.action.main.UpdateSingleUserIntegralAction">
+	       <result type="redirectAction">updateuserintegral.action</result>
+	    </action>
+	 <!-- 获得所有的订单action -->   
+	    <action name="showorder" class="org.tarena.dang.action.main.ShowOrderAction">
+	       <result>/manager/showOrder.jsp</result>
+	    </action>
+	<!-- 撤销订单 -->
+	    <action name="destoryorder" class="org.tarena.dang.action.main.ShowOrderAction">
+	        <result>/manager/destoryOrder.jsp</result>
+	    </action>
+	    <action name="destory" class="org.tarena.dang.action.main.ShowOrderAction" method="destoryByEmail">
+	       <result name="destorySucc" type="redirectAction">destoryorder.action</result>
+	    </action>
+	 <!-- 获得所有的商品 -->
+	    <action name="getbook" class="org.tarena.dang.action.main.FindAllBookAction">
+	       <result>/manager/allBook.jsp</result>
+	    </action>  
+	 <!-- 删除商品 -->
+	     <action name="getdeletebook" class="org.tarena.dang.action.main.FindAllBookAction">
+	        <result>/manager/deleteBook.jsp</result>
+	     </action>
+	     <action name="deletebook" class="org.tarena.dang.action.main.DeleteBookAction">
+	         <result name="success" type="redirectAction">getdeletebook.action</result>
+	     </action>
+	 <!-- 添加商品 
+	    <action name="addProduct" class="org.tarena.dang.action.main.AddProductAction">
+	      <result name="ok">/manager/ok.jsp</result>
+	    </action>-->
+    </package>
+</struts>
+
+
+
+
+
+
